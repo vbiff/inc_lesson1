@@ -42,7 +42,7 @@ videosRouter.post("/", (req: Request<videoInputDto>, res: Response) => {
       const creationDate: Date= new Date();
   const newVideo: Video = {
     availableResolutions: req.body.availableResolutions,
-    canBeDownloaded: true,
+    canBeDownloaded: false,
     createdAt: creationDate.toISOString(),
     minAgeRestriction: null,
     publicationDate: addOneDayToDate(creationDate).toISOString(),
