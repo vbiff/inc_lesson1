@@ -16,23 +16,14 @@ export const videoUpdateDtoValidation = (videoUpdate: videoUpdateDto) => {
   };
 
   //if
-  if (
-    !videoUpdate.author ||
-    // videoInput.author.trim().length < 2 ||
-    videoUpdate.author.trim().length > 20
-  ) {
+  if (!videoUpdate.author || videoUpdate.author.trim().length > 20) {
     errors.push({ field: "author", message: "author" });
   }
-  if (
-    !videoUpdate.title ||
-    // videoInput.title.trim().length < 2 ||
-    videoUpdate.title.trim().length > 40
-  ) {
+  if (!videoUpdate.title || videoUpdate.title.trim().length > 40) {
     errors.push({ field: "title", message: "Invalid title name" });
   }
   if (
     !videoUpdate.minAgeRestriction ||
-    // videoInput.title.trim().length < 2 ||
     videoUpdate.minAgeRestriction > 18 ||
     videoUpdate.minAgeRestriction < 1
   ) {
@@ -53,15 +44,15 @@ export const videoUpdateDtoValidation = (videoUpdate: videoUpdateDto) => {
       message: "Unacceptable resolution name(s)",
     });
   }
-    if (
-        !videoUpdate.canBeDownloaded
-       // videoUpdate.canBeDownloaded !== boolean ||
-    ) {
-        errors.push({
-            field: "canBeDownloaded",
-            message: "Unacceptable resolution name(s)",
-        });
-    }
+  if (
+    !videoUpdate.canBeDownloaded ||
+    typeof (videoUpdate as any).canBeDownloaded !== "boolean"
+  ) {
+    errors.push({
+      field: "canBeDownloaded",
+      message: "Unacceptable resolution name(s)",
+    });
+  }
   // if (
   //    typeof !videoUpdate.publicationDate !== typeof new Date()
   //
