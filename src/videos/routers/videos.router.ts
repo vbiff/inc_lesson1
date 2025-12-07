@@ -3,10 +3,10 @@ import { Video } from "../types/video";
 import { HttpStatuses } from "../../core/types/http-statuses";
 import { db } from "../../db/in-memory.db";
 import { videoInputDto } from "../dto/video.input-dto";
-import {videoInputDtoValidation} from "../validation/videoInputDtoValidation";
-import {ValidationError} from "../types/validationError";
-import {createErrorMessage} from "../../core/utils/error.utils";
-import {videoUpdateDtoValidation} from "../validation/videoUpdateDtoValidation";
+import { videoInputDtoValidation } from "../validation/videoInputDtoValidation";
+import { ValidationError } from "../types/validationError";
+import { createErrorMessage } from "../../core/utils/error.utils";
+import { videoUpdateDtoValidation } from "../validation/videoUpdateDtoValidation";
 
 export const videosRouter = Router();
 
@@ -28,18 +28,17 @@ videosRouter.get("/:id", (req: Request, res: Response) => {
 
 // create video
 
-const addOneDayToDate = (date : Date) => {
-    date.setDate(date.getDate() + 1)
-    return date
-}
+const addOneDayToDate = (date: Date) => {
+  date.setDate(date.getDate() + 1);
+  return date;
+};
 videosRouter.post("/", (req: Request<videoInputDto>, res: Response) => {
-    const errors: ValidationError[] = videoInputDtoValidation(req.body)
+  const errors: ValidationError[] = videoInputDtoValidation(req.body);
   if (errors.length > 0) {
-    res.status(HttpStatuses.BAD_REQUEST_400)
-        .send(createErrorMessage(errors));
+    res.status(HttpStatuses.BAD_REQUEST_400).send(createErrorMessage(errors));
     return;
   }
-      const creationDate: Date= new Date();
+  const creationDate: Date = new Date();
   const newVideo: Video = {
     availableResolutions: req.body.availableResolutions,
     canBeDownloaded: false,
@@ -57,12 +56,11 @@ videosRouter.post("/", (req: Request<videoInputDto>, res: Response) => {
 
 // update video
 videosRouter.put("/:id", (req: Request, res: Response) => {
-    const errors: ValidationError[] = videoUpdateDtoValidation(req.body)
-    if (errors.length > 0) {
-        res.status(HttpStatuses.BAD_REQUEST_400)
-            .send(createErrorMessage(errors));
-        return;
-    }
+  const errors: ValidationError[] = videoUpdateDtoValidation(req.body);
+  if (errors.length > 0) {
+    res.status(HttpStatuses.BAD_REQUEST_400).send(createErrorMessage(errors));
+    return;
+  }
   const movieIndex = db.videos.findIndex((m) => m.id === +req.params.id);
   if (!movieIndex) {
     res.status(HttpStatuses.NOT_FOUND_404);
@@ -95,7 +93,11 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
 videosRouter.delete("/:id", (req: Request, res: Response) => {
   const movieIndex = db.videos.findIndex((m) => m.id === +req.params.id);
   if (movieIndex === -1) {
-    res.status(HttpStatuses.NOT_FOUND_404);
+    res
+      .status(HttpStatuses.NOT_FOUND_404)
+      .send(
+        createErrorMessage([{ field: "id", message: "Vehicle not found" }]),
+      );
     return;
   }
   db.videos.splice(movieIndex, 1);

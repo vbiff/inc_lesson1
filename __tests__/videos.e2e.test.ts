@@ -109,7 +109,7 @@ describe("Videos API testing", () => {
 
   //delete
   it("Should delete video by Id", async () => {
-     await request(app)
+    await request(app)
       .delete("/videos/" + videoId)
       .expect(HttpStatuses.OK_200);
 

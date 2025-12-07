@@ -34,7 +34,10 @@ export const videoInputDtoValidation = (videoInput: videoInputDto) => {
     !videoInput.availableResolutions ||
     !isInclude(videoInput.availableResolutions)
   ) {
-    errors.push({ field: "availableResolutions", message: "Unacceptable resolution name(s)" });
+    errors.push({
+      field: "availableResolutions",
+      message: "Unacceptable resolution name(s)",
+    });
   }
   return errors;
 };
