@@ -21,14 +21,14 @@ export const videoInputDtoValidation = (videoInput: videoInputDto) => {
     // videoInput.author.trim().length < 2 ||
     videoInput.author.trim().length > 20
   ) {
-    errors.push({ field: "author", message: "Invalid author name" });
+    errors.push({ field: "author", message: "author" });
   }
   if (
     !videoInput.title ||
     // videoInput.title.trim().length < 2 ||
     videoInput.title.trim().length > 40
   ) {
-    errors.push({ field: "title", message: "Invalid title name" });
+    errors.push({ field: "title", message: "title" });
   }
   if (
     !videoInput.availableResolutions ||
