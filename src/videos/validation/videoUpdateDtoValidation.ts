@@ -50,14 +50,14 @@ export const videoUpdateDtoValidation = (videoUpdate: videoUpdateDto) => {
   ) {
     errors.push({
       field: "canBeDownloaded",
-      message: "Unacceptable resolution name(s)",
+      message: "Unacceptable canBeDownloaded",
     });
   }
-  // if (
-  //    typeof !videoUpdate.publicationDate !== typeof new Date()
-  //
-  // ) {
-  //     errors.push({ field: "publicationDate", message: "Unacceptable publication date format" });
-  // }
+  if (
+     typeof (videoUpdate as any).publicationDate !== 'string'
+
+  ) {
+      errors.push({ field: "publicationDate", message: "Unacceptable publication date format" });
+  }
   return errors;
 };
