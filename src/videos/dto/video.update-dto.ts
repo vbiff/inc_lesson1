@@ -5,6 +5,6 @@ export type videoUpdateDto = {
   author: string;
   canBeDownloaded: boolean;
   minAgeRestriction: null | number;
-  publicationDate: Date;
+  publicationDate: string;
   availableResolutions: AvailableResolutions[];
 };

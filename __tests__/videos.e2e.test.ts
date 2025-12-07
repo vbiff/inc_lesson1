@@ -61,7 +61,7 @@ describe("Videos API testing", () => {
 
     expect(responseVideoById.body).toEqual({
       id: videoId,
-      canBeDownloaded: true,
+      canBeDownloaded: false,
       minAgeRestriction: null,
       createdAt: expect.any(String),
       publicationDate: expect.any(String),
@@ -79,8 +79,8 @@ describe("Videos API testing", () => {
         AvailableResolutions.P720,
       ],
       canBeDownloaded: false,
-      minAgeRestriction: 37,
-      publicationDate: new Date(),
+      minAgeRestriction: 16,
+      publicationDate: new Date().toISOString(),
       title: "Naked",
     };
     await request(app)
